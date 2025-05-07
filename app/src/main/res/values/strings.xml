@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Limitly</string>
+    <string name="welcomeMsg">Take control of your screen time and boost your focus!</string>
+    <string name="logoDes">logo</string>
+    <string name="startImg">startImg</string>
+    <string name="startBtn">Let’s Focused!</string>
+</resources>
