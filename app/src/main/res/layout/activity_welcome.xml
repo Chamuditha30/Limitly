@@ -32,7 +32,7 @@
         />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/welcomeTxt"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
@@ -52,6 +52,7 @@
         android:layout_marginStart="104dp"
         android:layout_marginBottom="60dp"
         android:backgroundTint="@color/black"
+        android:onClick="startHandler"
         android:text="@string/startBtn"
         android:textColor="@color/white"
         android:textSize="24sp"
