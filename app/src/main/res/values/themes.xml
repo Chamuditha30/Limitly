@@ -6,4 +6,8 @@
     </style>
 
     <style name="Theme.Limitly" parent="Base.Theme.Limitly" />
+
+    <style name="BottomNavigationViewStyle" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="itemActiveIndicatorStyle">@null</item>
+    </style>
 </resources>

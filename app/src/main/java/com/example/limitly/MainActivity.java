@@ -1,12 +1,17 @@
 package com.example.limitly;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,5 +25,41 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        //find & assign navbar id to bottomNavigationView
+        BottomNavigationView bottomNavigationView = findViewById(R.id.navbar);
+
+        //display default page as HomeFragment
+        getSupportFragmentManager().beginTransaction().replace(R.id.main, new HomeFragment()).commit();
+
+        //mark the selected tab is home in navbar item
+        bottomNavigationView.setSelectedItemId(R.id.homeNav);
+
+        //handle page navigation
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            Fragment fragment = null;
+            int itemId = item.getItemId();
+
+            if (itemId == R.id.homeNav) {
+                fragment = new HomeFragment();
+            } else if (itemId == R.id.appsNav) {
+                fragment = new AppsFragment();
+            } else if (itemId == R.id.settingsNav) {
+                fragment = new SettingsFragment();
+            }
+
+            if (fragment != null) {
+                getSupportFragmentManager().beginTransaction().replace(R.id.main, fragment).commit();
+                return true;
+            }
+
+            return false;
+        });
+    }
+
+    //navigate to add app page
+    public void addAppNavHandler(View view) {
+        Intent intent = new Intent(MainActivity.this, AddAppActivity.class);
+        startActivity(intent);
     }
 }
