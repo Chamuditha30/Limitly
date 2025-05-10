@@ -19,7 +19,7 @@
     <!-- home page texts -->
 
     <!-- app page texts -->
-    <string name="addAppIcon">addAppIcon</string>
+    <string name="appsHeader">Apps</string>
 
     <!-- add app page texts -->
     <string name="backToAppPage">backToAppPage</string>

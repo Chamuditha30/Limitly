@@ -1,8 +1,6 @@
 package com.example.limitly;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -55,11 +53,5 @@ public class MainActivity extends AppCompatActivity {
 
             return false;
         });
-    }
-
-    //navigate to add app page
-    public void addAppNavHandler(View view) {
-        Intent intent = new Intent(MainActivity.this, AddAppActivity.class);
-        startActivity(intent);
     }
 }

@@ -2,9 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Declare app visibility -->
+    <!-- declare intent query for launcher apps -->
     <queries>
-        <!-- This lets your app query all launchable apps -->
         <intent>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
@@ -21,9 +20,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Limitly"
         tools:targetApi="31">
-        <activity
-            android:name=".AddAppActivity"
-            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />
