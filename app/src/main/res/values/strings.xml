@@ -1,32 +1,3 @@
 <resources>
-    <!-- welcome screen texts -->
     <string name="app_name">Limitly</string>
-    <string name="welcomeMsg">Take control of your screen time and boost your focus!</string>
-    <string name="logoDes">logo</string>
-    <string name="startImg">startImg</string>
-    <string name="startBtn">Let’s Focused!</string>
-
-    <!-- navbar texts -->
-    <string name="homeNav">Home</string>
-    <string name="appsNav">Apps</string>
-    <string name="settingsNav">Settings</string>
-
-    <!-- main 3 pages texts -->
-    <string name="home">Home</string>
-    <string name="apps">Apps</string>
-    <string name="settings">Settings</string>
-
-    <!-- home page texts -->
-
-    <!-- app page texts -->
-    <string name="appsHeader">Apps</string>
-
-    <!-- add app page texts -->
-    <string name="backToAppPage">backToAppPage</string>
-    <string name="addAppHeader">Add Apps</string>
-    <string name="addAppInfo">Select apps you want to limit</string>
-
-    <!-- custom app layout for each app -->
-    <string name="appIcon">appIcon</string>
-
 </resources>
