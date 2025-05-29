@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Limitly"
+rootProject.name = "LIMITLY"
 include(":app")

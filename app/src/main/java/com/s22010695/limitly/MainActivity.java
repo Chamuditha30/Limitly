@@ -1,4 +1,4 @@
-package com.example.limitly;
+package com.s22010695.limitly;
 
 import android.os.Bundle;
 
