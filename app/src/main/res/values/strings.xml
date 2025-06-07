@@ -1,3 +1,39 @@
 <resources>
-    <string name="app_name">LIMITLY</string>
+    <string name="app_name">Limitly</string>
+
+    <!--welcome screen-->
+    <string name="logoDec">logo</string>
+    <string name="humanImgDec">human</string>
+    <string name="welcomeTxt">Take control of your screen time &amp; boost your focus! </string>
+    <string name="welcomeBtnTxt">Let`s Focused!</string>
+
+    <!--login screen-->
+    <string name="loginTitle">Login</string>
+    <string name="usernameHint">Username</string>
+    <string name="passwordHint">Password</string>
+    <string name="loginBtnTxt">Login</string>
+    <string name="forgotPwTxt">Forgot password?</string>
+    <string name="newAccQ">Don`t have an account?</string>
+    <string name="signup">Sign up</string>
+
+    <!--signup screen-->
+    <string name="signupTitle">Signup</string>
+    <string name="signupBtnTxt">Signup</string>
+    <string name="haveAccQ">Have an account?</string>
+    <string name="login">Login</string>
+
+    <!--navbar icon titles-->
+    <string name="homeIconTitle">Home</string>
+    <string name="appsIconTitle">Apps</string>
+    <string name="settingsIconTitle">Settings</string>
+
+    <!--home screen-->
+    <string name="homeTitle">Home</string>
+    <string name="blockedAppsTitle">Today Blocked Apps</string>
+
+    <!--apps screen-->
+    <string name="appsTitle">Apps</string>
+
+    <!--settings screen-->
+    <string name="settingsTitle">Settings</string>
 </resources>
