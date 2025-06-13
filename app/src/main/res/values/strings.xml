@@ -30,10 +30,29 @@
     <!--home screen-->
     <string name="homeTitle">Home</string>
     <string name="blockedAppsTitle">Today Blocked Apps</string>
+    <string name="modesTitle">Limitly Modes</string>
+    <string name="timerModeIconDes">timerModeIcon</string>
+    <string name="timerModeName">Timer Mode</string>
+    <string name="focusModeIconDes">focusModeIcon</string>
+    <string name="focusModeName">Focus Mode</string>
+    <string name="focusModeDes">Block apps in focus zones</string>
+    <string name="studyModeIconDes">studyModeIcon</string>
+    <string name="studyModeName">Study Mode</string>
+    <string name="studyModeDes">Block apps when face down</string>
+    <string name="sleepModeIconDes">sleepModeIcon</string>
+    <string name="sleepModeName">Sleep Mode</string>
+    <string name="sleepModeDes">Block apps in sleeping time</string>
 
     <!--apps screen-->
     <string name="appsTitle">Apps</string>
+    <string name="appIconDes">appIcon</string>
 
     <!--settings screen-->
     <string name="settingsTitle">Settings</string>
+    <string name="setBlockIns">Set block time</string>
+    <string name="setUnblockIns">Set unblock time</string>
+    <string name="allZones">View Selected Focus Zones</string>
+    <string name="studyModeInfo">Block apps when face down after 10 sec</string>
+    <string name="setSleepTimeIns">Set sleep time</string>
+    <string name="setWakeIns">Set wake up time</string>
 </resources>

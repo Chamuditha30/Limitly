@@ -4,7 +4,6 @@
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
         <item name="colorSecondaryContainer">@android:color/white</item>
-        <item name="itemRippleColor">@android:color/white</item>
     </style>
 
     <style name="Theme.LIMITLY" parent="Base.Theme.LIMITLY" />
