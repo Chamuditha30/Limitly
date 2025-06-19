@@ -3,6 +3,7 @@ package com.s22010695.limitly;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -11,25 +12,30 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.google.android.material.timepicker.MaterialTimePicker;
-import com.google.android.material.timepicker.TimeFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class SettingsFragment extends Fragment {
 
     //declare objects
-    ImageView blockTimeIcon, unblockTimeIcon, setSleepTimeIcon, setWakeTimeIcon;
-    TextView selectedBlockTime, selectedUnblockTime, selectedSleepTime, selectedWakeTime;
+    private ImageView blockTimeIcon, unblockTimeIcon, setSleepTimeIcon, setWakeTimeIcon, addZoneIcon;
+    private TextView selectedBlockTime, selectedUnblockTime, selectedSleepTime, selectedWakeTime, navToZones;
+    private Button logoutBtn;
+    private TimerModeTableHandler timerModeHelper;
+    private SleepModeTableHandler sleepModeHelper;
 
     //declare variables
     private int blockTime, unblockTime, sleepTime, wakeTime;
 
-    @SuppressLint("MissingInflatedId")
+    @SuppressLint({"MissingInflatedId", "SetTextI18n"})
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,6 +51,17 @@ public class SettingsFragment extends Fragment {
         setWakeTimeIcon = view.findViewById(R.id.setWakeTimeIcon);
         selectedSleepTime = view.findViewById(R.id.selectedSleepTime);
         selectedWakeTime = view.findViewById(R.id.selectedWakeTime);
+
+        //connect timer mode table
+        timerModeHelper = new TimerModeTableHandler(requireContext());
+
+        //get block time from db
+        int blockedTime = timerModeHelper.getBlockTime();
+        selectedBlockTime.setText(blockedTime + " min");
+
+        //get unblock time from db
+        int unblockedTime = timerModeHelper.getUnblockTime();
+        selectedUnblockTime.setText(unblockedTime + " min");
 
         //set block time entered by user
         blockTimeIcon.setOnClickListener(new View.OnClickListener() {
@@ -62,6 +79,19 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        //connect timer mode table
+        sleepModeHelper = new SleepModeTableHandler(requireContext());
+
+        //get sleep time from db
+        int sleepMin = sleepModeHelper.getSleepTime();
+        String crntSleepTime = formatTime(sleepMin);
+        selectedSleepTime.setText(crntSleepTime);
+
+        //get wake time from db
+        int wakeMin = sleepModeHelper.getWakeTime();
+        String crntWakeTime = formatTime(wakeMin);
+        selectedWakeTime.setText(crntWakeTime);
+
         //set sleep time entered by user
         setSleepTimeIcon.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +108,36 @@ public class SettingsFragment extends Fragment {
             }
         });
 
+        //navigate to add zone activity using intent
+        addZoneIcon = view.findViewById(R.id.addZoneIcon);
+        addZoneIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), AddZoneActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //navigate to selected zones activity using intent
+        navToZones = view.findViewById(R.id.navToZones);
+        navToZones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), SelectedZonesActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //logout method
+        logoutBtn = view.findViewById(R.id.logoutBtn);
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
+                requireActivity().finish();
+            }
+        });
 
         return view;
     }
@@ -99,12 +159,13 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 blockTime = numberPicker.getValue();
-                selectedBlockTime.setText(blockTime + " min");
-                Toast.makeText(getContext(),blockTime + " min block time saved", Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        builder.setNegativeButton("Cancel", null);
+                //save block time
+                timerModeHelper.updateBlockTime(blockTime);
+                selectedBlockTime.setText(blockTime + " min");
+                Toast.makeText(getContext(), "Min block time saved", Toast.LENGTH_SHORT).show();
+            }
+        }).setNegativeButton("Cancel", null);
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -130,12 +191,13 @@ public class SettingsFragment extends Fragment {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 unblockTime = numberPicker.getValue();
-                selectedUnblockTime.setText(unblockTime + " min");
-                Toast.makeText(getContext(),unblockTime + " min unblock time saved", Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        builder.setNegativeButton("Cancel", null);
+                //save unblock time
+                timerModeHelper.updateUnblockTime(unblockTime);
+                selectedUnblockTime.setText(unblockTime + " min");
+                Toast.makeText(getContext(),"Min unblock time saved", Toast.LENGTH_SHORT).show();
+            }
+        }).setNegativeButton("Cancel", null);
 
         AlertDialog dialog = builder.create();
         dialog.show();
@@ -160,12 +222,12 @@ public class SettingsFragment extends Fragment {
                 int hour = timePicker.getHour();
                 int minute = timePicker.getMinute();
 
-                String amPm = (hour >= 12) ? " PM" : " AM";
-                int hour12 = (hour == 0 || hour == 12) ? 12 : hour % 12;
-                String formatedTime = hour12 + " : " + minute + amPm;
                 sleepTime = hour + minute;
-                selectedSleepTime.setText(formatedTime);
-                Toast.makeText(getContext(),formatedTime + " sleep time saved", Toast.LENGTH_SHORT).show();
+
+                //save sleep time
+                sleepModeHelper.updateSleepTime(sleepTime);
+                selectedSleepTime.setText(formatTime(sleepTime));
+                Toast.makeText(getContext(),"Sleep time saved", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -191,12 +253,12 @@ public class SettingsFragment extends Fragment {
                 int hour = timePicker.getHour();
                 int minute = timePicker.getMinute();
 
-                String amPm = (hour >= 12) ? " PM" : " AM";
-                int hour12 = (hour == 0 || hour == 12) ? 12 : hour % 12;
-                String formatedTime = hour12 + " : " + minute + amPm;
                 wakeTime = hour + minute;
-                selectedWakeTime.setText(formatedTime);
-                Toast.makeText(getContext(),formatedTime + " sleep time saved", Toast.LENGTH_SHORT).show();
+
+                //save wake time
+                sleepModeHelper.updateWakeTime(wakeTime);
+                selectedWakeTime.setText(formatTime(wakeTime));
+                Toast.makeText(getContext(),"Sleep time saved", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -205,4 +267,18 @@ public class SettingsFragment extends Fragment {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
+
+    //create method for format time from minutes
+    public String formatTime(int minutes){
+        int hour = minutes / 60;
+        int min = minutes % 60;
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, hour);
+        calendar.set(Calendar.MINUTE, min);
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm a", Locale.getDefault());
+        return simpleDateFormat.format(calendar.getTime());
+    }
+
 }

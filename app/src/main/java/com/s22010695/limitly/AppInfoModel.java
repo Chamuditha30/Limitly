@@ -24,8 +24,8 @@ public class AppInfoModel {
         return appName;
     }
 
-    public void setAppName(String appname) {
-        this.appName = appname;
+    public void setAppName(String appName) {
+        this.appName = appName;
     }
 
     public String getPackageName() {

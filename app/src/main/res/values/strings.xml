@@ -55,4 +55,27 @@
     <string name="studyModeInfo">Block apps when face down after 10 sec</string>
     <string name="setSleepTimeIns">Set sleep time</string>
     <string name="setWakeIns">Set wake up time</string>
+    <string name="logoutBtnTxt">Logout</string>
+
+    <!--add zone screen-->
+    <string name="addZoneTitle">Add Focus Zone</string>
+    <string name="backIconDes">backIconDes</string>
+    <string name="addIconDes">addIconDes</string>
+    <string name="addZoneHint">Find safe zone</string>
+    <string name="GoogleMapAPI">AIzaSyCLuZt71b24YIGkN4mpQPZA5ZxAQzF0FUM</string>
+    <string name="addZoneBtnTxt">Search</string>
+    <string name="removeIconDes">removeIconDes</string>
+
+    <!--selected zones screen-->
+    <string name="selectedZonesTitle">Focus Zones</string>
+
+    <!--forgot password screen-->
+    <string name="forgotPwTitle">Forgot Password</string>
+    <string name="forgotPwUsernameHint">Enter your username</string>
+    <string name="forgotPwBtnTxt">Change</string>
+
+    <!--change password screen-->
+    <string name="changePwTitle">Change Password</string>
+    <string name="newPwHint">Enter new password</string>
+    <string name="submitPwBtnTxt">Submit</string>
 </resources>

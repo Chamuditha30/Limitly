@@ -27,7 +27,7 @@ public class WelcomeActivity extends AppCompatActivity {
 
     //navigate to login activity using intent
     public void navToLoginActivity(View view) {
-        Intent intent = new Intent(this, LoginActivity.class);
+        Intent intent = new Intent(this, SignupActivity.class);
         startActivity(intent);
     }
 }

@@ -3,6 +3,8 @@ package com.s22010695.limitly;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +13,10 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class LoginActivity extends AppCompatActivity {
+
+    //declare objects
+    EditText username, password;
+    UserTableHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +28,43 @@ public class LoginActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        //connect database
+        dbHandler = new UserTableHandler(this);
+
+        //get inputs by id
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+    }
+
+    //navigate to main activity using intent
+    public void navToMainActivity(View view) {
+        //convert inputs to strings
+        String user = username.getText().toString();
+        String pass = password.getText().toString();
+
+        //check user enter both
+        if (user.isEmpty() || pass.isEmpty()){
+            Toast.makeText(this, "Please enter all fields", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        try {
+            boolean res = dbHandler.login(user, pass);
+
+            if (res){
+                username.setText("");
+                password.setText("");
+                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, "Please check username & password", Toast.LENGTH_SHORT).show();
+            }
+        } catch (Exception e) {
+            Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            throw new RuntimeException(e);
+        }
     }
 
     //navigate to signup activity using intent
@@ -30,9 +73,9 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //navigate to main activity using intent
-    public void navToMainActivity(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
+    //navigate to forgot password activity using intent
+    public void navToForgotPasswordActivity(View view) {
+        Intent intent = new Intent(this, ForgotPasswordActivity.class);
         startActivity(intent);
     }
 }

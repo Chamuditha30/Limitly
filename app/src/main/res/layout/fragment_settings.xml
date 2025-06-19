@@ -95,7 +95,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="15 min"
+                        android:text=""
                         android:textColor="@color/darkGray"
                         android:textSize="20sp" />
 
@@ -104,7 +104,7 @@
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_gravity="center"
-                        android:layout_marginLeft="8dp"
+                        android:layout_marginStart="8dp"
                         android:contentDescription="@string/timerModeIconDes"
                         android:src="@drawable/icon_timer_dark" />
 
@@ -117,7 +117,7 @@
                     android:paddingHorizontal="16dp">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
@@ -130,7 +130,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="30 min"
+                        android:text=""
                         android:textColor="@color/darkGray"
                         android:textSize="20sp" />
 
@@ -178,6 +178,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/navToZones"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/allZones"
@@ -188,7 +189,7 @@
                 </LinearLayout>
 
                 <ImageView
-                    android:id="@+id/zoneIcon"
+                    android:id="@+id/addZoneIcon"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="end|bottom"
@@ -277,7 +278,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="10 : 00 PM"
+                        android:text=""
                         android:textColor="@color/darkGray"
                         android:textSize="20sp" />
 
@@ -312,7 +313,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="05 : 00 AM"
+                        android:text=""
                         android:textColor="@color/darkGray"
                         android:textSize="20sp" />
 
@@ -328,6 +329,16 @@
                 </LinearLayout>
 
             </LinearLayout>
+
+            <Button
+                android:id="@+id/logoutBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/logoutBtnTxt"
+                android:backgroundTint="@color/black"
+                android:textSize="18sp"
+                android:layout_gravity="center"
+                android:layout_marginVertical="16dp"/>
 
         </LinearLayout>
     </ScrollView>
