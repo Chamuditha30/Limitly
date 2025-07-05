@@ -155,7 +155,7 @@ public class SettingsFragment extends Fragment {
         builder.setTitle("Set block time (Min)");
 
         final NumberPicker numberPicker = new NumberPicker(getContext());
-        numberPicker.setMinValue(5);
+        numberPicker.setMinValue(1);
         numberPicker.setMaxValue(15);
         numberPicker.setValue(15);
 

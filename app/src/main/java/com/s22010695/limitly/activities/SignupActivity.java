@@ -68,6 +68,8 @@ public class SignupActivity extends AppCompatActivity {
             Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
             throw new RuntimeException(e);
         }
+
+        finish();
     }
 
     public void navToLoginActivity(View view) {

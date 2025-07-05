@@ -6,8 +6,10 @@ import android.app.AppOpsManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PowerManager;
 import android.provider.Settings;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -100,6 +102,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
 
         if (hasAllPermissions() && !isForegroundServiceRunning()) {
+            requestIgnoreBatteryOptimizations();
             startForegroundService();
         }
     }
@@ -190,6 +193,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (allGranted) {
+                requestIgnoreBatteryOptimizations();
                 startForegroundService();
             } else {
                 Toast.makeText(this, "All permissions are required for the service to run.", Toast.LENGTH_LONG).show();
@@ -209,6 +213,17 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Usage Access is required for the app to function.", Toast.LENGTH_LONG).show();
             }
+        }
+    }
+
+    private void requestIgnoreBatteryOptimizations() {
+        PowerManager pm = (PowerManager) getSystemService(POWER_SERVICE);
+        String packageName = getPackageName();
+
+        if (!pm.isIgnoringBatteryOptimizations(packageName)) {
+            Intent intent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
+            intent.setData(Uri.parse("package:" + packageName));
+            startActivity(intent);
         }
     }
 }

@@ -36,6 +36,13 @@
         tools:ignore="ForegroundServicePermission"
         tools:targetApi="35">
         <activity
+            android:name=".activities.BlockedOverlayActivity"
+            android:exported="false"
+            android:excludeFromRecents="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:launchMode="singleInstance"
+            android:taskAffinity=""/>
+        <activity
             android:name=".activities.ChangePasswordActivity"
             android:exported="false" />
         <activity
@@ -67,21 +74,15 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <!-- access google map services -->
+        </activity> <!-- access google map services -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="@string/GoogleMapAPI" />
-
-        <!-- declare foreground service -->
+            android:value="@string/GoogleMapAPI" /> <!-- declare foreground service -->
         <service
             android:name=".services.ForegroundService"
             android:enabled="true"
             android:exported="false"
             android:foregroundServiceType="location|dataSync" />
-
-        <!-- declare boot receiver -->
     </application>
 
 </manifest>

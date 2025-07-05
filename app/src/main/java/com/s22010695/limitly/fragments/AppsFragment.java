@@ -46,7 +46,7 @@ public class AppsFragment extends Fragment {
         getUserInstalledApps();
 
         //connect recycler view with adapter
-        AppListAdapter adapter = new AppListAdapter(userInstalledApps, dbHelper);
+        AppListAdapter adapter = new AppListAdapter(getContext().getApplicationContext(), userInstalledApps, dbHelper);
         recyclerView.setAdapter(adapter);
 
         return view;

@@ -30,5 +30,7 @@ public class StartActivity extends AppCompatActivity {
         } else {
             startActivity(new Intent(this, LoginActivity.class));
         }
+
+        finish();
     }
 }

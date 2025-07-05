@@ -1,5 +1,6 @@
 package com.s22010695.limitly.db_helpers;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.s22010695.limitly.R;
+import com.s22010695.limitly.mode_helpers.MainFunction;
 
 import java.util.List;
 
@@ -19,11 +21,13 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.AppViewH
     //declare objects
     private List<AppInfoModel> appList;
     private AppsTableHandler dbHelper;
+    private MainFunction mainFunction;
 
     //create constructor
-    public AppListAdapter(List<AppInfoModel> appList, AppsTableHandler dbHelper) {
+    public AppListAdapter(Context context, List<AppInfoModel> appList, AppsTableHandler dbHelper) {
         this.appList = appList;
         this.dbHelper = dbHelper;
+        this.mainFunction = new MainFunction(context);
     }
 
     @NonNull
@@ -51,6 +55,7 @@ public class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.AppViewH
         holder.blockSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             app.setBlocked(isChecked);
             dbHelper.updateAppState(app.getPackageName(), isChecked);
+            mainFunction.refreshSelectedApps();
         });
     }
 

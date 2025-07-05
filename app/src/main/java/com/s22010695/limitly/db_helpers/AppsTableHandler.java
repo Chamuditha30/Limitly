@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 //create a class for apps table methods
 public class AppsTableHandler {
     //create objects
@@ -41,5 +44,24 @@ public class AppsTableHandler {
 
         cursor.close();
         return isBlocked;
+    }
+
+    //get all blocked apps method
+    public List<String> getAllBlockedApps(){
+        List<String> blockedApps = new ArrayList<>();
+        SQLiteDatabase db = new DatabaseHelper(context).getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_NAME, new String[]{"PACKAGE_NAME"}, "IS_BLOCKED = ?", new String[]{"1"}, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                String packageName = cursor.getString(0);
+                blockedApps.add(packageName);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return blockedApps;
     }
 }

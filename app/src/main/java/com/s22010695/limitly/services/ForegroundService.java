@@ -16,9 +16,14 @@ import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import com.s22010695.limitly.R;
+import com.s22010695.limitly.mode_helpers.MainFunction;
 
 public class ForegroundService extends Service {
 
+    //declare objects
+    MainFunction mainFunction;
+
+    //declare variables
     private static final String CHANNEL_ID = "Foreground Service ID";
 
     @Override
@@ -66,12 +71,19 @@ public class ForegroundService extends Service {
             startForeground(1001, notification);
         }
 
-        //simulate work
+        //create main function
+        if (mainFunction == null){
+            mainFunction = new MainFunction(this);
+        }
+
+        //run service
         new Thread(() -> {
             while (true) {
+                //run main function
+                mainFunction.run();
                 Log.e("Service", "Service is running...");
                 try {
-                    Thread.sleep(2000);
+                    Thread.sleep(5000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }

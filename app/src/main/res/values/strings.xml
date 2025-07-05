@@ -78,4 +78,10 @@
     <string name="changePwTitle">Change Password</string>
     <string name="newPwHint">Enter new password</string>
     <string name="submitPwBtnTxt">Submit</string>
+
+    <!--block overlay screen-->
+    <string name="blockedBy">App Blocked By</string>
+    <string name="quote">“Less scrolling, more living.”</string>
+    <string name="cllToAction">Lets focused your works!</string>
+    <string name="exitBtnTxt">Exit</string>
 </resources>
