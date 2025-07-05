@@ -55,7 +55,7 @@
     <string name="studyModeInfo">Block apps when face down after 10 sec</string>
     <string name="setSleepTimeIns">Set sleep time</string>
     <string name="setWakeIns">Set wake up time</string>
-    <string name="logoutBtnTxt">Logout</string>
+    <string name="logoutBtnTxt">Sign out</string>
 
     <!--add zone screen-->
     <string name="addZoneTitle">Add Focus Zone</string>

@@ -1,4 +1,4 @@
-package com.s22010695.limitly;
+package com.s22010695.limitly.fragments;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -18,6 +18,13 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import com.s22010695.limitly.R;
+import com.s22010695.limitly.db_helpers.SleepModeTableHandler;
+import com.s22010695.limitly.db_helpers.TimerModeTableHandler;
+import com.s22010695.limitly.activities.AddZoneActivity;
+import com.s22010695.limitly.activities.LoginActivity;
+import com.s22010695.limitly.activities.SelectedZonesActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -222,7 +229,7 @@ public class SettingsFragment extends Fragment {
                 int hour = timePicker.getHour();
                 int minute = timePicker.getMinute();
 
-                sleepTime = hour + minute;
+                sleepTime = hour * 60 + minute;
 
                 //save sleep time
                 sleepModeHelper.updateSleepTime(sleepTime);
@@ -253,7 +260,7 @@ public class SettingsFragment extends Fragment {
                 int hour = timePicker.getHour();
                 int minute = timePicker.getMinute();
 
-                wakeTime = hour + minute;
+                wakeTime = hour * 60 + minute;
 
                 //save wake time
                 sleepModeHelper.updateWakeTime(wakeTime);

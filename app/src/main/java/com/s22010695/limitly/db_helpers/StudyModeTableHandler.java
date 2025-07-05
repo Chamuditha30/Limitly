@@ -1,19 +1,18 @@
-package com.s22010695.limitly;
+package com.s22010695.limitly.db_helpers;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-public class FocusModeTableHandler {
+public class StudyModeTableHandler {
     //create objects
-    private SQLiteDatabase db;
     private Context context;
 
     //create variables
-    public static final String TABLE_NAME = "focus_mode";
+    public static final String TABLE_NAME = "study_mode";
 
-    public FocusModeTableHandler(Context context) {
+    public StudyModeTableHandler(Context context) {
         this.context = context;
     }
 
@@ -22,7 +21,7 @@ public class FocusModeTableHandler {
         SQLiteDatabase db = new DatabaseHelper(context).getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put("IS_ENABLE", isEnabled ? 1 : 0);
+        values.put("IS_ENABLED", isEnabled ? 1 : 0);
 
         //update row where id  = 1
         db.update(TABLE_NAME, values, "ID = 1", null);

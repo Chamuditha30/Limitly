@@ -1,19 +1,18 @@
-package com.s22010695.limitly;
+package com.s22010695.limitly.db_helpers;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-public class SleepModeTableHandler {
+public class TimerModeTableHandler {
     //create objects
-    private SQLiteDatabase db;
     private Context context;
 
     //create variables
-    public static final String TABLE_NAME = "sleep_mode";
+    public static final String TABLE_NAME = "timer_mode";
 
-    public SleepModeTableHandler(Context context) {
+    public TimerModeTableHandler(Context context) {
         this.context = context;
     }
 
@@ -22,7 +21,7 @@ public class SleepModeTableHandler {
         SQLiteDatabase db = new DatabaseHelper(context).getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put("IS_ENABLE", isEnabled ? 1 : 0);
+        values.put("IS_ENABLED", isEnabled ? 1 : 0);
 
         //update row where id  = 1
         db.update(TABLE_NAME, values, "ID = 1", null);
@@ -30,12 +29,12 @@ public class SleepModeTableHandler {
         db.close();
     }
 
-    //update sleep time
-    public void updateSleepTime(int sleepTime){
+    //update block time
+    public void updateBlockTime(int blockTime){
         SQLiteDatabase db = new DatabaseHelper(context).getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put("SLEEP_TIME_MIN", sleepTime);
+        values.put("BLOCK_TIME_MIN", blockTime);
 
         //update row where id  = 1
         db.update(TABLE_NAME, values, "ID = 1", null);
@@ -43,12 +42,12 @@ public class SleepModeTableHandler {
         db.close();
     }
 
-    //update wake time
-    public void updateWakeTime(int wakeTime){
+    //update block time
+    public void updateUnblockTime(int unblockTime){
         SQLiteDatabase db = new DatabaseHelper(context).getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put("WAKE_TIME_MIN", wakeTime);
+        values.put("UNBLOCK_TIME_MIN", unblockTime);
 
         //update row where id  = 1
         db.update(TABLE_NAME, values, "ID = 1", null);
@@ -74,41 +73,39 @@ public class SleepModeTableHandler {
         return isEnabled;
     }
 
-    //get sleep time
-    public int getSleepTime(){
+    //get block time
+    public int getBlockTime(){
         SQLiteDatabase db = new DatabaseHelper(context).getReadableDatabase();
-        int sleepTime = 0;
+        int blockTime = 15;
 
         //get row id = 1
-        Cursor cursor = db.query(TABLE_NAME, new String[]{"SLEEP_TIME_MIN"}, "ID = ?", new String[]{String.valueOf("1")}, null, null, null);
+        Cursor cursor = db.query(TABLE_NAME, new String[]{"BLOCK_TIME_MIN"}, "ID = ?", new String[]{String.valueOf("1")}, null, null, null);
         if (cursor.moveToFirst()){
-            sleepTime = cursor.getInt(0);
+            blockTime = cursor.getInt(0);
         }
         cursor.moveToFirst();
 
         cursor.close();
         db.close();
 
-        return sleepTime;
+        return blockTime;
 
     }
 
-    //get wake time
-    public int getWakeTime(){
+    //get unblock time
+    public int getUnblockTime(){
         SQLiteDatabase db = new DatabaseHelper(context).getReadableDatabase();
-        int wakeTime = 0;
+        int unblockTime = 30;
 
-        //get row id = 1
-        Cursor cursor = db.query(TABLE_NAME, new String[]{"WAKE_TIME_MIN"}, "ID = ?", new String[]{String.valueOf("1")}, null, null, null);
+        Cursor cursor = db.query(TABLE_NAME, new String[]{"UNBLOCK_TIME_MIN"}, "ID = ?", new String[]{String.valueOf("1")}, null, null, null);
         if (cursor.moveToFirst()){
-            wakeTime = cursor.getInt(0);
+            unblockTime = cursor.getInt(0);
         }
-        cursor.moveToFirst();
 
         cursor.close();
         db.close();
 
-        return wakeTime;
-
+        return unblockTime;
     }
+
 }

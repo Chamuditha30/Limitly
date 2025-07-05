@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".HomeFragment">
+    tools:context=".fragments.HomeFragment">
 
     <TextView
         android:id="@+id/homeTitle"
@@ -156,7 +156,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="24dp"
-                        android:text="You’ve used TikTok for 15 minutes. It’s now blocked for 30 minutes."
+                        android:text="Tiktok blocked for 15 minutes"
                         android:textColor="@color/darkGray"
                         android:textSize="16sp" />
                 </LinearLayout>

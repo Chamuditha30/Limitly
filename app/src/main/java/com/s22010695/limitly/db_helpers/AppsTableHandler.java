@@ -1,4 +1,4 @@
-package com.s22010695.limitly;
+package com.s22010695.limitly.db_helpers;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -8,7 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 //create a class for apps table methods
 public class AppsTableHandler {
     //create objects
-    private SQLiteDatabase db;
     private Context context;
 
     //create variables

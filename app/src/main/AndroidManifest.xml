@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <!-- permission for access locations -->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" /> <!-- permission for access internet -->
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- permission for access foreground services -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_LOCATION" /> <!-- permission for start foreground services after phone reboot -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission
+        android:name="android.permission.PACKAGE_USAGE_STATS"
+        tools:ignore="ProtectedPermissions" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- permission for notifications -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- permission for data sync -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" /> <!-- for get device apps -->
     <queries>
         <intent>
             <action android:name="android.intent.action.MAIN" />
@@ -24,33 +33,34 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.LIMITLY"
-        tools:targetApi="31">
+        tools:ignore="ForegroundServicePermission"
+        tools:targetApi="35">
         <activity
-            android:name=".ChangePasswordActivity"
+            android:name=".activities.ChangePasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".ForgotPasswordActivity"
+            android:name=".activities.ForgotPasswordActivity"
             android:exported="false" />
         <activity
-            android:name=".SelectedZonesActivity"
+            android:name=".activities.SelectedZonesActivity"
             android:exported="false" />
         <activity
-            android:name=".AddZoneActivity"
+            android:name=".activities.AddZoneActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".SignupActivity"
+            android:name=".activities.SignupActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".WelcomeActivity"
+            android:name=".activities.WelcomeActivity"
             android:exported="false" />
         <activity
-            android:name=".StartActivity"
+            android:name=".activities.StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -59,9 +69,19 @@
             </intent-filter>
         </activity>
 
+        <!-- access google map services -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/GoogleMapAPI" />
+
+        <!-- declare foreground service -->
+        <service
+            android:name=".services.ForegroundService"
+            android:enabled="true"
+            android:exported="false"
+            android:foregroundServiceType="location|dataSync" />
+
+        <!-- declare boot receiver -->
     </application>
 
 </manifest>

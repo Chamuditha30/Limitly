@@ -1,10 +1,9 @@
-package com.s22010695.limitly;
+package com.s22010695.limitly.db_helpers;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.Build;
 
 import androidx.annotation.Nullable;
 

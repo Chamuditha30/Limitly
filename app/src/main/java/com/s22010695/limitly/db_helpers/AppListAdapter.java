@@ -1,4 +1,4 @@
-package com.s22010695.limitly;
+package com.s22010695.limitly.db_helpers;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
+import com.s22010695.limitly.R;
 
 import java.util.List;
 

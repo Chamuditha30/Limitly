@@ -1,4 +1,4 @@
-package com.s22010695.limitly;
+package com.s22010695.limitly.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class LoginActivity extends AppCompatActivity {
+import com.s22010695.limitly.R;
+import com.s22010695.limitly.db_helpers.UserTableHandler;
+
+public class SignupActivity extends AppCompatActivity {
 
     //declare objects
     EditText username, password;
@@ -22,7 +25,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_signup);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -37,8 +40,8 @@ public class LoginActivity extends AppCompatActivity {
         password = findViewById(R.id.password);
     }
 
-    //navigate to main activity using intent
-    public void navToMainActivity(View view) {
+    //navigate to login activity using intent
+    public void signup(View view) {
         //convert inputs to strings
         String user = username.getText().toString();
         String pass = password.getText().toString();
@@ -50,16 +53,16 @@ public class LoginActivity extends AppCompatActivity {
         }
 
         try {
-            boolean res = dbHandler.login(user, pass);
+            boolean res = dbHandler.signup(user, pass);
 
             if (res){
                 username.setText("");
                 password.setText("");
-                Toast.makeText(this, "Login successful", Toast.LENGTH_SHORT).show();
-                Intent intent = new Intent(this, MainActivity.class);
+                Toast.makeText(this, "Signup successful", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
             } else {
-                Toast.makeText(this, "Please check username & password", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "You are already signed up. Please login", Toast.LENGTH_SHORT).show();
             }
         } catch (Exception e) {
             Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
@@ -67,15 +70,8 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-    //navigate to signup activity using intent
-    public void navToSignupActivity(View view) {
-        Intent intent = new Intent(this, SignupActivity.class);
-        startActivity(intent);
-    }
-
-    //navigate to forgot password activity using intent
-    public void navToForgotPasswordActivity(View view) {
-        Intent intent = new Intent(this, ForgotPasswordActivity.class);
+    public void navToLoginActivity(View view) {
+        Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }
 }

@@ -1,4 +1,4 @@
-package com.s22010695.limitly;
+package com.s22010695.limitly.fragments;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,10 +10,14 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.s22010695.limitly.db_helpers.AppInfoModel;
+import com.s22010695.limitly.db_helpers.AppListAdapter;
+import com.s22010695.limitly.db_helpers.AppsTableHandler;
+import com.s22010695.limitly.R;
 
 import java.util.ArrayList;
 import java.util.List;

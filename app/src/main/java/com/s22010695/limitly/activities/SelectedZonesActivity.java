@@ -1,4 +1,4 @@
-package com.s22010695.limitly;
+package com.s22010695.limitly.activities;
 
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +10,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.s22010695.limitly.R;
+import com.s22010695.limitly.db_helpers.ZoneInfoModel;
+import com.s22010695.limitly.db_helpers.ZoneListAdapter;
+import com.s22010695.limitly.db_helpers.ZonesTableHandler;
 
 import java.util.ArrayList;
 import java.util.List;

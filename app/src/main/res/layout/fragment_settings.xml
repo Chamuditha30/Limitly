@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".SettingsFragment">
+    tools:context=".fragments.SettingsFragment">
 
     <TextView
         android:id="@+id/settingsTitle"
@@ -71,6 +71,7 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="8dp"
                     android:text="@string/timerModeName"
+                    android:textColor="@color/darkGray"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -174,6 +175,7 @@
                         android:layout_gravity="center"
                         android:layout_marginBottom="8dp"
                         android:text="@string/focusModeName"
+                        android:textColor="@color/darkGray"
                         android:textSize="24sp"
                         android:textStyle="bold" />
 
@@ -222,6 +224,7 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="8dp"
                     android:text="@string/studyModeName"
+                    android:textColor="@color/darkGray"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -254,6 +257,7 @@
                     android:layout_gravity="center"
                     android:layout_marginBottom="8dp"
                     android:text="@string/sleepModeName"
+                    android:textColor="@color/darkGray"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -269,8 +273,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_weight="1"
+                        android:textColor="@color/darkGray"
                         android:text="@string/setSleepTimeIns"
-                        android:textColor="@color/black"
                         android:textSize="20sp" />
 
                     <TextView
@@ -335,10 +339,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/logoutBtnTxt"
+                android:textColor="@color/white"
                 android:backgroundTint="@color/black"
                 android:textSize="18sp"
                 android:layout_gravity="center"
-                android:layout_marginVertical="16dp"/>
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="80dp"/>
 
         </LinearLayout>
     </ScrollView>

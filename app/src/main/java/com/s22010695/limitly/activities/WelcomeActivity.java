@@ -1,8 +1,7 @@
-package com.s22010695.limitly;
+package com.s22010695.limitly.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -10,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.s22010695.limitly.R;
 
 public class WelcomeActivity extends AppCompatActivity {
 

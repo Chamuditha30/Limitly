@@ -1,4 +1,4 @@
-package com.s22010695.limitly;
+package com.s22010695.limitly.db_helpers;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -10,7 +10,6 @@ import java.util.List;
 
 public class ZonesTableHandler {
     //create objects
-    private SQLiteDatabase db;
     private Context context;
 
     //create variables

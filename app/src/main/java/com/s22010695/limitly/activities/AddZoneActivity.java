@@ -1,4 +1,4 @@
-package com.s22010695.limitly;
+package com.s22010695.limitly.activities;
 
 import android.location.Address;
 import android.location.Geocoder;
@@ -20,6 +20,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.s22010695.limitly.R;
+import com.s22010695.limitly.db_helpers.ZonesTableHandler;
 
 import java.util.List;
 

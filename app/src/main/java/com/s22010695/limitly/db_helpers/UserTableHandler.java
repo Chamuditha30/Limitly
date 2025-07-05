@@ -1,4 +1,4 @@
-package com.s22010695.limitly;
+package com.s22010695.limitly.db_helpers;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class UserTableHandler {
     //create objects
-    private SQLiteDatabase db;
     private Context context;
 
     //create variables

@@ -1,4 +1,4 @@
-package com.s22010695.limitly;
+package com.s22010695.limitly.db_helpers;
 
 public class ZoneInfoModel {
     //create variables
