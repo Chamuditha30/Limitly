@@ -210,6 +210,23 @@ public class MainActivity extends AppCompatActivity {
             if (hasUsageAccess()) {
                 //now that Usage Access is granted, show permission popup
                 requestPermissionsIfNeeded();
+
+                //request permission for overlay
+                if (!Settings.canDrawOverlays(this)) {
+                    new androidx.appcompat.app.AlertDialog.Builder(this)
+                            .setTitle("Overlay Permission Needed")
+                            .setMessage("LIMITLY needs permission to display blocking overlays on top of apps.")
+                            .setCancelable(false)
+                            .setPositiveButton("Allow", (dialog, which) -> {
+                                Intent overlayIntent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                        Uri.parse("package:" + getPackageName()));
+                                startActivity(overlayIntent);
+                            })
+                            .setNegativeButton("Cancel", (dialog, which) -> {
+                                Toast.makeText(this, "Overlay permission is required to block apps visually.", Toast.LENGTH_LONG).show();
+                            })
+                            .show();
+                }
             } else {
                 Toast.makeText(this, "Usage Access is required for the app to function.", Toast.LENGTH_LONG).show();
             }

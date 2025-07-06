@@ -21,6 +21,15 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String TABLE_STUDY_MODE_NAME = "study_mode";
     public static final String TABLE_SLEEP_MODE_NAME = "sleep_mode";
 
+    private static DatabaseHelper instance;
+
+    public static synchronized DatabaseHelper getInstance(Context context) {
+        if (instance == null) {
+            instance = new DatabaseHelper(context.getApplicationContext());
+        }
+        return instance;
+    }
+
     public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }

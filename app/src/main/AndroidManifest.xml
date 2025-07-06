@@ -15,7 +15,8 @@
         tools:ignore="ProtectedPermissions" />
     <uses-permission android:name="android.permission.WAKE_LOCK" /> <!-- permission for notifications -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" /> <!-- permission for data sync -->
-    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" /> <!-- for get device apps -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC" /> <!--permission for get device apps -->
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /> <!--permission for block overlay screen -->
     <queries>
         <intent>
             <action android:name="android.intent.action.MAIN" />

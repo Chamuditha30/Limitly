@@ -1,14 +1,11 @@
 package com.s22010695.limitly.mode_helpers;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
-import com.s22010695.limitly.activities.BlockedOverlayActivity;
 import com.s22010695.limitly.db_helpers.TimerModeTableHandler;
 
 import java.util.HashMap;
-import java.util.List;
 
 public class TimerModeHelper {
     //declare objects
@@ -17,8 +14,10 @@ public class TimerModeHelper {
 
     //declare hashmaps to track start time, store unblock time for blocked apps and last time user exited the app of each app in milliseconds
     private static final HashMap<String, Long> appStartTimes = new HashMap<>();
-    private static final HashMap<String, Long> appBlockUntil = new HashMap<>();
     private static final HashMap<String, Long> lastAppExitTime = new HashMap<>();
+
+    //declare variable for block all selected apps until this time
+    private static long blockUntil = 0;
 
     //declare variable for reset app usage after 5 min
     private final long RESTART_THRESHOLD = 5 * 60 * 1000;
@@ -39,26 +38,18 @@ public class TimerModeHelper {
     }
 
     //create method for apply timer mode
-    public void apply(String activeApp) {
+    public boolean apply(String activeApp) {
+        if (!dbHelper.getIsEnable()) return false;
+
         Log.d("TimerMode", "apply() called for: " + activeApp);
 
         //get current time in milliseconds
         long now = System.currentTimeMillis();
 
         //check if app currently blocked
-        if (appBlockUntil.containsKey(activeApp)){
-            long unblockAt = appBlockUntil.get(activeApp);
-            if (now < unblockAt){
-                Log.d("TimerMode", activeApp + " is blocked until " + unblockAt);
-
-                //start blocking overlay activity on top
-                showBlockScreen();
-
-                return;
-            }else {
-                appBlockUntil.remove(activeApp);
-                Log.d("TimerMode", activeApp + " is now unblocked");
-            }
+        if (now < blockUntil) {
+            Log.d("TimerMode", "Timer mode still blocking all apps.");
+            return true;
         }
 
         //if not track this app yet
@@ -86,19 +77,14 @@ public class TimerModeHelper {
         //cal usage and check the need of block
         long usageDuration = now - appStartTimes.getOrDefault(activeApp, now);
         if (usageDuration >= blockMilli) {
-            appBlockUntil.put(activeApp, now + unblockMilli);
-            appStartTimes.remove(activeApp);
-            Log.d("TimerMode", "Blocked " + activeApp + " for " + unblockMin + " mins");
-
-            //start blocking overlay activity on top
-            showBlockScreen();
+            blockUntil = now + unblockMilli;
+            //stop timers for all apps
+            appStartTimes.clear();
+            Log.d("TimerMode", "Timer mode activated. All selected apps blocked until: " + blockUntil);
+            return true;
         }
-    }
 
-    private void showBlockScreen() {
-        Intent intent = new Intent(context, BlockedOverlayActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
+        return false;
     }
 
     public void onAppExit(String app) {

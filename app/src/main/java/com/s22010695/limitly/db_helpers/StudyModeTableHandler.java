@@ -7,31 +7,26 @@ import android.database.sqlite.SQLiteDatabase;
 
 public class StudyModeTableHandler {
     //create objects
-    private Context context;
+    private final SQLiteDatabase db;
 
     //create variables
     public static final String TABLE_NAME = "study_mode";
 
     public StudyModeTableHandler(Context context) {
-        this.context = context;
+        db = DatabaseHelper.getInstance(context).getWritableDatabase();
     }
 
     //update is enable
     public void updateIsEnable(boolean isEnabled){
-        SQLiteDatabase db = new DatabaseHelper(context).getWritableDatabase();
-
         ContentValues values = new ContentValues();
         values.put("IS_ENABLED", isEnabled ? 1 : 0);
 
         //update row where id  = 1
         db.update(TABLE_NAME, values, "ID = 1", null);
-
-        db.close();
     }
 
     //get is enable
     public boolean getIsEnable(){
-        SQLiteDatabase db = new DatabaseHelper(context).getReadableDatabase();
         boolean isEnabled = false;
 
         //get row id = 1
@@ -42,7 +37,6 @@ public class StudyModeTableHandler {
             isEnabled = cursor.getInt(0) == 1;
         }
         cursor.close();
-        db.close();
 
         return isEnabled;
     }

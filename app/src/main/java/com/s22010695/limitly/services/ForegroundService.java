@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ServiceInfo;
 import android.os.Build;
+import android.os.Handler;
 import android.os.IBinder;
 import android.util.Log;
 import android.Manifest;
@@ -25,6 +26,10 @@ public class ForegroundService extends Service {
 
     //declare variables
     private static final String CHANNEL_ID = "Foreground Service ID";
+
+    //declare handler and runnable variables for periodic checking
+    private Handler handler;
+    private Runnable runnable;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -74,23 +79,24 @@ public class ForegroundService extends Service {
         //create main function
         if (mainFunction == null){
             mainFunction = new MainFunction(this);
+            startMainLoop();
         }
 
-        //run service
-        new Thread(() -> {
-            while (true) {
-                //run main function
-                mainFunction.run();
-                Log.e("Service", "Service is running...");
-                try {
-                    Thread.sleep(5000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-
         return START_STICKY;
+    }
+
+    // Start periodic loop using Handler every 2 seconds
+    private void startMainLoop() {
+        handler = new Handler();
+        runnable = new Runnable() {
+            @Override
+            public void run() {
+                mainFunction.run();
+                Log.d("ForegroundService", "Service running...");
+                handler.postDelayed(this, 2000);
+            }
+        };
+        handler.post(runnable);
     }
 
     @Nullable
