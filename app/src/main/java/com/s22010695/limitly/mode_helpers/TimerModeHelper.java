@@ -32,11 +32,6 @@ public class TimerModeHelper {
         return dbHelper.getIsEnable();
     }
 
-    //create method for timer mode was active ot not
-    public boolean isActive(){
-        return true;
-    }
-
     //create method for apply timer mode
     public boolean apply(String activeApp) {
         if (!dbHelper.getIsEnable()) return false;

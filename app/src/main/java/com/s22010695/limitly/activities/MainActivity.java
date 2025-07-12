@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     //declare variables
     private static final int REQUEST_PERMISSIONS_CODE = 100;
     private static final int REQUEST_USAGE_ACCESS_CODE = 101;
+    private static final int REQUEST_BACKGROUND_LOCATION_CODE = 102;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
                     })
                     .show();
         } else {
-            requestPermissionsIfNeeded();
+            requestForegroundPermissionsIfNeeded();
         }
     }
 
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
         startActivityForResult(intent, REQUEST_USAGE_ACCESS_CODE);
     }
 
-    private void requestPermissionsIfNeeded() {
+    private void requestForegroundPermissionsIfNeeded() {
         List<String> permissions = new ArrayList<>();
 
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -147,11 +148,38 @@ public class MainActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this,
                     permissions.toArray(new String[0]),
                     REQUEST_PERMISSIONS_CODE);
+        } else {
+            // Foreground permissions are all granted, now request background location permission if needed
+            requestBackgroundLocationPermissionIfNeeded();
+        }
+    }
+
+    // New method to request background location permission
+    private void requestBackgroundLocationPermissionIfNeeded() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) { // Android 10+
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_BACKGROUND_LOCATION},
+                        REQUEST_BACKGROUND_LOCATION_CODE);
+            } else {
+                // Background location permission already granted - start service if not running
+                if (!isForegroundServiceRunning()) {
+                    requestIgnoreBatteryOptimizations();
+                    startForegroundService();
+                }
+            }
+        } else {
+            // Background location permission not required below Android 10
+            if (!isForegroundServiceRunning()) {
+                requestIgnoreBatteryOptimizations();
+                startForegroundService();
+            }
         }
     }
 
     private boolean hasAllPermissions() {
         return ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.FOREGROUND_SERVICE) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.FOREGROUND_SERVICE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
                 ContextCompat.checkSelfPermission(this, Manifest.permission.FOREGROUND_SERVICE_DATA_SYNC) == PackageManager.PERMISSION_GRANTED;
@@ -193,10 +221,20 @@ public class MainActivity extends AppCompatActivity {
             }
 
             if (allGranted) {
-                requestIgnoreBatteryOptimizations();
-                startForegroundService();
+                // Foreground permissions granted, now request background location
+                requestBackgroundLocationPermissionIfNeeded();
             } else {
                 Toast.makeText(this, "All permissions are required for the service to run.", Toast.LENGTH_LONG).show();
+            }
+        } else if (requestCode == REQUEST_BACKGROUND_LOCATION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Background location permission granted
+                if (!isForegroundServiceRunning()) {
+                    requestIgnoreBatteryOptimizations();
+                    startForegroundService();
+                }
+            } else {
+                Toast.makeText(this, "Background location permission is required for persistent location tracking.", Toast.LENGTH_LONG).show();
             }
         }
     }
@@ -209,7 +247,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == REQUEST_USAGE_ACCESS_CODE) {
             if (hasUsageAccess()) {
                 //now that Usage Access is granted, show permission popup
-                requestPermissionsIfNeeded();
+                requestForegroundPermissionsIfNeeded();
 
                 //request permission for overlay
                 if (!Settings.canDrawOverlays(this)) {

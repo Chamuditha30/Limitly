@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 
 import com.s22010695.limitly.R;
 import com.s22010695.limitly.mode_helpers.MainFunction;
+import com.s22010695.limitly.mode_helpers.StudyModeHelper;
 
 public class ForegroundService extends Service {
 
@@ -103,5 +104,11 @@ public class ForegroundService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         return null;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
     }
 }

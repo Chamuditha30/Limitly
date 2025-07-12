@@ -4,7 +4,6 @@ import android.content.Context;
 import android.util.Log;
 
 import com.s22010695.limitly.db_helpers.SleepModeTableHandler;
-import com.s22010695.limitly.db_helpers.TimerModeTableHandler;
 
 import java.util.Calendar;
 
@@ -22,10 +21,6 @@ public class SleepModeHelper {
 
     public boolean isEnable() {
         return dbHelper.getIsEnable();
-    }
-
-    public boolean isActive() {
-        return isActive;
     }
 
     public boolean apply() {

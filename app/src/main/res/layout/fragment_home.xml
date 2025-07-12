@@ -86,11 +86,11 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/blockedAppsCount"
+                        android:id="@+id/blockCount"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
-                        android:text="2"
+                        android:text=""
                         android:textColor="@color/darkGray"
                         android:textSize="48sp"
                         android:textStyle="bold" />
@@ -100,7 +100,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="24dp"
-                        android:text="Excellent control today! Keep up the focus!"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="16sp" />
                 </LinearLayout>
@@ -146,17 +146,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="4dp"
-                        android:text="Timer Mode Activated"
+                        android:text=""
                         android:textColor="@color/black"
                         android:textSize="20sp"
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/blockedAppInfo"
+                        android:id="@+id/activatedModeInfo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="24dp"
-                        android:text="Tiktok blocked for 15 minutes"
+                        android:text=""
                         android:textColor="@color/darkGray"
                         android:textSize="16sp" />
                 </LinearLayout>
